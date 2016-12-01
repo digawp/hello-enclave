@@ -91,5 +91,30 @@ int main(int argc, char const *argv[]) {
         std::cout << "noob" << std::endl;
     }
     printf("Random number: %d\n", ptr);
+
+    // Seal the random number
+    size_t sealed_size = sizeof(sgx_sealed_data_t) + sizeof(ptr);
+    uint8_t* sealed_data = (uint8_t*)malloc(sealed_size);
+
+    int seal_status;
+    status = seal(global_eid, &seal_status,
+            (uint8_t*)&ptr, sizeof(ptr),
+            (sgx_sealed_data_t*)sealed_data, sealed_size);
+
+    if (status != SGX_SUCCESS || !seal_status) {
+        std::cout << "Sealing failed :(" << std::endl;
+    }
+
+    int unsealed;
+    status = unseal(global_eid, &seal_status,
+            (sgx_sealed_data_t*)sealed_data, sealed_size,
+            (uint8_t*)&unsealed, sizeof(unsealed));
+
+    if (status != SGX_SUCCESS || !seal_status) {
+        std::cout << "Unsealing failed :(" << std::endl;
+    }
+
+    std::cout << "Seal round trip success! Receive back " << unsealed << std::endl;
+
     return 0;
 }
