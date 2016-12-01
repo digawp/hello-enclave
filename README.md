@@ -4,6 +4,12 @@ This is meant to be a base template for an [Intel SGX](https://github.com/01org/
 
 This template is based on the SampleEnclave app of the sample enclaves provided with the Intel SGX Linux [drivers](https://github.com/01org/linux-sgx-driver) and [SDK](https://github.com/01org/linux-sgx/).
 
+## Features
+
+- Sample code for doing `ECALL`
+- Sample code for doing `OCALL`
+- Sample code for sealing
+
 ## TODO
 
 - Tutorial explaining what each directory and file is used for.
