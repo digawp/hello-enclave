@@ -8,7 +8,7 @@ This template is based on the SampleEnclave app of the sample enclaves provided 
 
 - Sample code for doing `ECALL`
 - Sample code for doing `OCALL`
-- Sample code for sealing
+- Sample code for sealing (can be taken out and patched into your enclave!)
 
 ## TODO
 
@@ -16,6 +16,8 @@ This template is based on the SampleEnclave app of the sample enclaves provided 
 
 - Write a getting started tutorial.
 
+- Tutorial on treating `edl`s as static library (with the sealing functions as example)
+
 ## Contribute
 
-Any help to cut down the number of codes and adding explanations (especially the Makefile) will be much appreciated!
+Any help for the above TODOs or any general feedback will be much appreciated! Go ahead and submit those PRs in!
