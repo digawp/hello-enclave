@@ -1,12 +1,9 @@
 enclave {
-    include "sgx_tseal.h"
+    from "Sealing/Sealing.edl" import *;
+
     trusted {
         /* define ECALLs here. */
         public int generate_random_number(void);
-
-        public int seal([in, size=plaintext_len]uint8_t* plaintext, size_t plaintext_len, [out, size=sealed_size]sgx_sealed_data_t* sealed_data, size_t sealed_size);
-
-        public int unseal([in, size=sealed_size]sgx_sealed_data_t* sealed_data, size_t sealed_size, [out, size=plaintext_max_len]uint8_t* plaintext, size_t plaintext_max_len);
     };
 
     untrusted {
