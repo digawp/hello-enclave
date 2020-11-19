@@ -25,6 +25,16 @@ int main(int argc, char const *argv[]) {
     }
     printf("Random number: %d\n", ptr);
 
+    // Perform a simple addition in the enclave
+    int a = ptr;
+    int b = 100;
+    status = ecall_add(global_eid, &ptr, a, b);
+    if (status != SGX_SUCCESS) {
+        std::cout << "Enclave addition failed :(" << std::endl;
+        return 1;
+    }
+    std::cout << "Enclave addition success! " << a << " + " << b << " = " << ptr << std::endl;
+
     // Seal the random number
     size_t sealed_size = sizeof(sgx_sealed_data_t) + sizeof(ptr);
     uint8_t* sealed_data = (uint8_t*)malloc(sealed_size);
@@ -48,6 +58,14 @@ int main(int argc, char const *argv[]) {
     }
 
     std::cout << "Seal round trip success! Receive back " << unsealed << std::endl;
+
+
+    // Destroy enclave
+    status = sgx_destroy_enclave(global_eid);
+    if(status != SGX_SUCCESS) {
+        std::cout <<  "Fail to destroy enclave.\n" << std::endl;
+        return 1;
+    }
 
     return 0;
 }

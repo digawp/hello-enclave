@@ -1,4 +1,5 @@
 enclave {
+	from "Add/Add.edl" import *;
     from "Sealing/Sealing.edl" import *;
 
     trusted {
